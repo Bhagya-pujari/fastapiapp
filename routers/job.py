@@ -18,6 +18,20 @@ def get_company(job_id:int):
     return jobs[job_id]
 
 
+
+@router.put("/{job_id}")
+def update_job(job_id:int,job:JobUpdate):
+    jobs[job_id]=job
+    return jobs
+
+
+@router.delete("/{job_id}")
+def delete_job(job_id:int):
+    jobs.pop(job_id)
+    return jobs
+
+
+
 @router.get("/")
 def read_job():
     return {"job":"Job root"}
@@ -25,13 +39,3 @@ def read_job():
 @router.get("/(job_id)")
 def read_job(job_id:int):
     return{"job_id":job_id}
-
-@router.put("/{job_id}")
-def update_job(job_id:int, job:JobUpdate):
-    jobs[job_id]=job
-    return jobs
-
-@router.delete("/{job_id}")
-def delete_job(job_id:int):
-    jobs.pop(job_id)
-    return jobs
