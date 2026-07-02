@@ -15,3 +15,8 @@ class UserResponse(UserBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+    
+class Login_User(BaseModel):
+    email: str
+    password: str
+    
