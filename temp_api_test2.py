@@ -1,0 +1,10 @@
+import http.client, json, urllib.parse  
+conn=http.client.HTTPConnection('127.0.0.1',8000)  
+payload=json.dumps({'username':'testuser','email':'test@example.com','password':'test123','role':'user'})  
+conn.request('POST','/auth/register',payload,{'Content-Type':'application/json'})  
+r=conn.getresponse()  
+print('REGISTER', r.status, r.read().decode())  
+body=urllib.parse.urlencode({'grant_type':'password','username':'test@example.com','password':'test123'})  
+conn.request('POST','/auth/login',body,{'Content-Type':'application/x-www-form-urlencoded'})  
+r=conn.getresponse()  
+print('LOGIN', r.status, r.read().decode())  
