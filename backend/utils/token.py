@@ -2,10 +2,10 @@ from jose import jwt
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
-from backend.models.users import User
+from models.users import User
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
-from backend.database import get_db
+from database import get_db
 
 
 load_dotenv()

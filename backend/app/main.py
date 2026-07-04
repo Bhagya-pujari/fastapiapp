@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from backend.routers import company,job,auth
-from backend.database import Base,engine
-from backend.models import company as company_model,job as job_model,users as user_model
+from routers import company,job,auth
+from database import Base,engine
+from models import company as company_model,job as job_model,users as user_model
 from fastapi.middleware.cors import CORSMiddleware
 
 app=FastAPI()
