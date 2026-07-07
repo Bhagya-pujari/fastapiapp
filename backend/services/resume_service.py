@@ -20,14 +20,13 @@ Analyze the given resume text and provide:
 2. Experience Level
 3. Strengths 
 4. Areas to Improve
-5. Suggest job titles
-keep the analysis short and structured"
-    
-"""
-    ),
+5. Suggested Job Roles
+Keep the analysis short and structed """ ),
+    ("human", "{resume_text}")
 ])
 
-resume_chain= resume_prompt | llm
+resume_chain = resume_prompt | llm
 
-def analyze_resume(resume_text: str) -> str:
-    
+def analyse_resume(resume_text: str) -> str:
+    response = resume_chain.invoke({"resume_text": resume_text})
+    return response.content

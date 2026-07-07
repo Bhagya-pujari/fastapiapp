@@ -1,20 +1,36 @@
-import type {LoginRequest,LoginResponse,RegisterRequest,RegisterResponse} from "../types/user";
-import axios from "axios";
-const API_URL = "http://localhost:8000/auth";
+import {useState} from "react";
+import {login} from "../Services/AuthService";
 
-export const login = async (credentials:LoginRequest):Promise<LoginResponse>=>{
-    // Backend expects OAuth2PasswordRequestForm (form-encoded with "username" field)
-    const formData = new URLSearchParams();
-    formData.append("username", credentials.email);
-    formData.append("password", credentials.password);
-
-    const response = await axios.post<LoginResponse>(`${API_URL}/login`, formData, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    });
-    return response.data;
+type Props = {
+    onLogin: (token: string) => void;
+    onSwitchToRegister: () => void;
 }
 
-export const register = async (user:RegisterRequest):Promise<RegisterResponse>=>{
-    const response = await axios.post<RegisterResponse>(`${API_URL}/register`,user);
-    return response.data;
+function Login({onLogin, onSwitchToRegister}: Props){
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+
+    const handleSubmit = async (e:React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await login({email,password});
+            onLogin(response.access_token);
+        } catch (error) {
+            console.error("Error during login:", error);
+            alert("Login failed");
+        }
+    }   
+    return(
+        <form onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" required/>
+            <br />
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" required/>
+            <br />
+            <button type="submit">Login</button>
+            <p>Don't have an account? <button type="button" onClick={onSwitchToRegister}>Register</button></p>
+        </form>
+    )
 }
+
+export default Login;

@@ -1,4 +1,4 @@
-import type { Job } from "./job";
+import type {Job} from "./job";
 interface Company{
     id:number;
     name:string;
@@ -7,4 +7,4 @@ interface Company{
     location:string;
     jobs:Job[];
 }
-export type { Company }
+export type {Company}

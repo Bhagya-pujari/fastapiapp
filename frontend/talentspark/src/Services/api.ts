@@ -1,21 +1,19 @@
 import axios from "axios";
-import type { InternalAxiosRequestConfig } from "axios";
+
+const API_BASE_URL = "http://localhost:8000";
 
 const api = axios.create({
-    baseURL: "",
+    baseURL: API_BASE_URL,
 });
 
 // Automatically attach the Bearer token to every request
-api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+api.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
     if (token) {
-        const headers = config.headers ?? {};
-        config.headers = {
-            ...(headers as Record<string, string>),
-            Authorization: `Bearer ${token}`,
-        } as any;
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
 
 export default api;
+export { API_BASE_URL };

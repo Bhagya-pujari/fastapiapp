@@ -6,7 +6,7 @@ type Props = {
 }
 
 function Register({onSwitchToLogin}: Props){
-    const [username,setUsername] = useState("");
+    const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [role,setRole] = useState("");
@@ -14,7 +14,7 @@ function Register({onSwitchToLogin}: Props){
     const handleSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
         try {
-            await register({username,email,password,role});
+            await register({name,email,password,role});
             alert("Registration successful! Please login.");
             onSwitchToLogin();
         } catch (error) {
@@ -25,7 +25,7 @@ function Register({onSwitchToLogin}: Props){
     return(
         <form onSubmit={handleSubmit}>
             <h2>Register</h2>
-            <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username" required/>
+            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Name" required/>
             <br />
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" required/>
             <br />
