@@ -2,13 +2,10 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-
+from models import job as job_model,company as company_model,users as user_model
+from database import Base,engine
 from alembic import context
-from backend.database import Base
-from backend.models.company import Company
-from backend.models.job import Job
-from backend.models.users import User
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

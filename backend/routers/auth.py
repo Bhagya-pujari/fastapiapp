@@ -17,7 +17,7 @@ def register(user:UserCreate,db:Session = Depends(get_db)):
         raise HTTPException(status_code=400,detail="Email already exists")
     hashed_password=hash_password(user.password)
     db_user=User(
-        username=user.name,
+        name=user.name,
         email=user.email,
         hashed_password=hashed_password,
         role=user.role 
