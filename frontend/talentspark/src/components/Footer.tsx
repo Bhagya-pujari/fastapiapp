@@ -1,8 +1,9 @@
-function Footer(){
-    return(
-        <footer>
-            <p> All rights reserved by Talentspark</p>
-        </footer>
-    )
+﻿function Footer() {
+  return (
+    <footer className="footer">
+      <p>TalentSpark keeps hiring work simple, focused, and ready for the next opportunity.</p>
+    </footer>
+  );
 }
-export default Footer
+
+export default Footer;
